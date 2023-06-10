@@ -24,4 +24,18 @@ contract Lottery {
         require(manager == msg.sender, "You are not the manager");
         return address(this).balance;
     }
+
+    // To pick a random winner
+    function random() public view returns (uint) {
+        return
+            uint(
+                keccak256(
+                    abi.encodePacked(
+                        block.prevrandao,
+                        block.timestamp,
+                        players.length
+                    )
+                )
+            );
+    }
 }
