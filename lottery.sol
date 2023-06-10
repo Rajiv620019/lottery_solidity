@@ -38,4 +38,16 @@ contract Lottery {
                 )
             );
     }
+
+    // Function to pick the winner
+    function pickWinner() public {
+        require(manager == msg.sender, "You are not the manager");
+        require(players.length >= 3, "Players are less than 3");
+
+        uint randonNum = random();
+        uint index = randonNum % players.length;
+        winner = players[index];
+        winner.transfer(getBalance());
+        players = new address payable[](0);
+    }
 }
