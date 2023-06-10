@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.9;
+pragma solidity 0.8.20;
 
 contract Lottery {
     // Defining magager, players and winner
@@ -9,18 +9,18 @@ contract Lottery {
     address payable public winner;
 
     // Setting up manager address
-    Constructor () {
+    constructor() {
         manager = msg.sender;
     }
 
     // Function to participate
-    function participate() public payable () {
-        require (msg.value == 1 ether, "Please pay ony 1 Ether only");
+    function participate() public payable {
+        require(msg.value == 1 ether, "Please pay ony 1 Ether only");
         players.push(payable(msg.sender));
     }
 
     // To get the balance of the contract
-    function getBalance() public view returns(uint) {
+    function getBalance() public view returns (uint) {
         require(manager == msg.sender, "You are not the manager");
         return address(this).balance;
     }
